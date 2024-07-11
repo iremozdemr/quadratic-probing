@@ -1,0 +1,51 @@
+soru-1 a:
+    iyi bir hash fonksiyonu hangi özellikleri sağlamalıdır?
+    1-hash fonksiyonun hesaplanması hızlı ve kolay olmalıdır
+    2-çakışmaları(collisions) en aza indirmelidir
+    3-eğer bir sabit sayı kullanılıyorsa bu sayı iyi seçilmiş bir sayı olmalıdır
+    mesela ders kitabında örnek olarak verilen sayılar:
+    33 37 39 41...
+    4-kullanılan veri yapısı üzerindeki anahtarlar(keys) eşit dağılmalıdır
+    5-bit işlemleri kullanılıyorsa veri kaybı/bit kaybı olabildiğince aza indirgenmelidir
+
+soru-1 b:
+    n/N > 1 yani: n>N
+    açık adresleme tekniğinde her anahtar bir hücreye yerleştirilir
+    eğer bir çakışma oluyorsa linear probing-quadratic probing vb. uygulamalar kullanılarak eklenecek olan anahtar başka bir hücreye yerleştirilir
+    eğer load factor > 1 oluyorsa bunun anlamı kapasiteden daha fazla anahtar eklendiği anlamına gelir
+    fakat bu açık adreslemede mümkün değildir çünkü veri yapısının kapasitesi dolduğunda anahtarın eklenmesi için herhangi bir boş hücre yoktur
+
+soru-1 c:
+    linear probing için örnek:
+    kullanılan veri yapısının mesela arrayin boyutu = n olsun
+    dolu hücre sayısı = n olsun
+    bu durumda hash fonksiyonu çalışarak sürekli boş hücreyi arar ve bu yüzden tüm elementleri sırasıyla dolaşır
+    bu yüzden worst case O(n) olur
+
+    separate chaining için örnek:
+    tüm anahtarların hash değeri aynıysa
+    tüm elementler aynı bucket içine yerleştirilir
+    bu bucket ayrı bir lineer veri yapısı haline gelir
+    yeni bir element eklemek için veri yapısının sonuna kadar gitmek gerekir
+    bu yüzden worst case O(n) olur
+
+soru-2 a:
+    -eğer S kümesi S={0,99} gibi ise elementler arasındaki fark çok fazlaysa
+    bu durumda hash table'da çok fazla boş alan bulunur
+    bu örnekte 98 tane null değerli hücre bulunur
+    -hash table'ın kapasitesinden daha büyük değerli bir element eklenmeye çalışıldığında array'in büyütülmesi gerekir
+    bu işlem zaman alıcıdır ve masraflıdır
+    -eğer S kümesi S={1,1,2,3} gibi ise yani aynı key değerini içeriyorsa
+    hashtable çakışmalar için bir çözüme sahip değildir
+    -h(x) fonksiyonu 1. sorunun a şıkkındaki özellikleri sağlamaz
+
+soru-2 b:
+    -hashtable çakışma sorununu çözmemektedir
+    bu sorunu çözmek için arraylist kullanılabilir
+    çakışmanın olduğu hücreye element eklerken hücrede bir arraylist oluşturulur
+    çakışan elementler hücrede bulunan arrayliste eklenir
+
+    -hashtable kapasiteden daha büyük değerli element ekleme sorununu çözmemektedir
+    bu sorunun çözümü için dizinin boyutu +c gibi bir sabit sayı ile toplamak yerine
+    c gibi bir sabit sayıyla çarpılmalıdır
+    veya load factor threshold'u geçtiğinde dizi genişletilebilir
